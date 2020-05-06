@@ -99,10 +99,14 @@ public class TimeClientHandle implements Runnable {
     }
 
     private void doConnect() throws IOException {
+        // 如果直接连接成功，则注册到多路复用器上，发送请求消息
         if (socketChannel.connect(new InetSocketAddress(host, port))) {
+            // 注册读取事件
             socketChannel.register(selector, SelectionKey.OP_READ);
+            // 向服务端发送请求
             doWrite(socketChannel);
         } else {
+            // 注册一个连接事件
             socketChannel.register(selector, SelectionKey.OP_CONNECT);
         }
     }
