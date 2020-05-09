@@ -15,7 +15,9 @@ public class AsyncTimeServerHandler implements Runnable {
     public AsyncTimeServerHandler(int port) {
         this.port = port;
         try {
+            // 创建server channel
             asynchronousServerSocketChannel = AsynchronousServerSocketChannel.open();
+            // 绑定到指定端口
             asynchronousServerSocketChannel.bind(new InetSocketAddress(port));
             System.out.println("The time server is start in port : " + port);
         } catch (IOException e) {
@@ -40,6 +42,7 @@ public class AsyncTimeServerHandler implements Runnable {
     }
 
     public void doAccept() {
+        // 异步处理新的连接，this作为attachment传递，AcceptCompletionHandler用来处理新的连接
         asynchronousServerSocketChannel.accept(this, new AcceptCompletionHandler());
     }
 }
