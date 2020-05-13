@@ -1,0 +1,20 @@
+spring:
+  redis:
+    cluster:
+      nodes:
+        - 127.0.0.1:6379
+        - 127.0.0.1:6380
+        - 127.0.0.1:6381
+        - 127.0.0.1:6382
+        - 127.0.0.1:6383
+        - 127.0.0.1:6384
+      connectionTimeout: 6000
+      soTimeout: 6000
+      maxAttempts: 5
+      password:
+    jedis:
+      pool:
+        max-idle: 10
+        min-idle: 0
+        max-active: 100
+        max-wait: -1ms
